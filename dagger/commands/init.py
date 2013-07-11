@@ -1,12 +1,6 @@
 import os
 import sys
 
-from contextlib import contextmanager
-from fcntl import (
-  flock,
-  LOCK_EX,
-  LOCK_UN
-)
 from optparse import OptionParser
 from subprocess import (
   call,
@@ -34,22 +28,6 @@ parser.add_option('--dry-run',
   help='Do not make changes.')
 
 
-@contextmanager
-def workingdir(path):
-  """ cd into destination path (obtaining an exclusive lock), yield context,
-  cd to original path
-  """
-  original = os.getcwd()
-  with open(os.path.join(path, 'dagger'), 'w') as dagger:
-    flock(dagger, LOCK_EX)
-    if not os.path.samefile(path, original):
-      os.chdir(path)
-      yield
-      os.chdir(original)
-    else:
-      yield
-    flock(dagger, LOCK_UN)
-
 def handle(options, args):
   """ Every dagger has a handle! """
 
@@ -58,13 +36,11 @@ def handle(options, args):
   except IndexError:
     path = '.'
 
-  with workingdir(path):
+  with dagger.workingdir(path):
     result = call(['git show-ref --verify refs/heads/%s' % options.branch], shell=True)
     if result:
       # CI branch does not exist... Create it
-      branch = Popen(['git rev-parse --abbrev-ref HEAD'], shell=True,
-        stdout=PIPE)
-      lastbranch = branch.communicate()[0].strip()
+      lastbranch = dagger.getcwdbranch()
 
       # Orphaned checkout
       call(['git checkout --orphan %s' % options.branch], shell=True)
@@ -86,3 +62,5 @@ def handle(options, args):
       print options.branch, 'branch created with empty dependencies.txt\n'
       print 'Next step: Checkout', options.branch, 'update dependencies'
 
+    else:
+      print 'Nothing to do.'
