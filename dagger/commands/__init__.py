@@ -1,5 +1,7 @@
 __all__ = \
   [
     'dep',
-    'init'
+    'init',
+    'run',
+    'status'
   ]
