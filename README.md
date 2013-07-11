@@ -52,7 +52,16 @@ establishing depenciencies.
   `git rm -rf .`
   `git rev-list -n 1 ...`
   `git add dependencies.txt`
-  `git commit --amend`
+  `git commit`
+
+Initializing a project requires:
+
+- Target repository (assumed to be .)
+- Target CI branch (default: CI)
+- List of dependencies (optional), each consisting of:
+  - Repository URL
+  - Initial commitish
+  - Stable branch
 
 Process
 -------
