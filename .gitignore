@@ -1,0 +1,7 @@
+.gitignore
+*.pyc
+*.egg-info/
+bin/
+include/
+lib/
+.Python
