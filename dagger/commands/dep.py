@@ -7,8 +7,6 @@ from subprocess import (
   PIPE,
   Popen
 )
-from StringIO import StringIO
-from tempfile import TemporaryFile
 
 import dagger
 
@@ -27,7 +25,7 @@ parser.add_option('--no-commit',
   default=True)
 
 def handle(options, args):
-  """ Every dagger has a handle! """
+  """ Specify a dependency """
 
   if '://' in args[1]:
     path = args.pop(0)

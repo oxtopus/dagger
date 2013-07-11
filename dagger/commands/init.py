@@ -2,13 +2,7 @@ import os
 import sys
 
 from optparse import OptionParser
-from subprocess import (
-  call,
-  PIPE,
-  Popen
-)
-from StringIO import StringIO
-from tempfile import TemporaryFile
+from subprocess import call
 
 import dagger
 
@@ -29,7 +23,7 @@ parser.add_option('--dry-run',
 
 
 def handle(options, args):
-  """ Every dagger has a handle! """
+  """ Initialize a project """
 
   try:
     path = args.pop(0)
