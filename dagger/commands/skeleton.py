@@ -13,3 +13,6 @@ def handle(options, args):
     path = args.pop(0)
   except IndexError:
     path = '.'
+
+  with dagger.workingdir(path):
+    pass

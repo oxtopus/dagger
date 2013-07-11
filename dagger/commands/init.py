@@ -40,11 +40,12 @@ def handle(options, args):
       call(['git checkout --orphan %s' % options.branch], shell=True)
       call(['git rm -rf .'], shell=True)
 
-      # Write dependencies...
-      with open('dependencies.txt', 'w') as outp:
-        pass
+      # Write dagger config...
+      conf = dagger.Config()
+      conf.set('dagger', 'tracking', lastbranch)
+      conf.save()
 
-      call(['git add dependencies.txt'], shell=True)
+      call(['git add dagger.cfg'], shell=True)
 
       # Commit
       message = 'dagger init ' + ' '.join(sys.argv[1:])
@@ -53,7 +54,7 @@ def handle(options, args):
       # Return to original branch
       call(['git checkout %s' % lastbranch], shell=True)
 
-      print options.branch, 'branch created with empty dependencies.txt\n'
+      print options.branch, 'branch created with initial dagger config.\n'
       print 'Next step: Checkout', options.branch, 'update dependencies'
 
     else:

@@ -28,6 +28,16 @@ def workingdir(path):
       yield
     flock(dagger, LOCK_UN)
 
+
 def getcwdbranch():
   branch = Popen(['git rev-parse --abbrev-ref HEAD'], shell=True, stdout=PIPE)
   return branch.communicate()[0].strip()
+
+
+def getrevisions(stable, source):
+  """ List revisions between stable branch and dagger branch
+  """
+  revlist = Popen(['git rev-list %s..%s' % (stable, source)], shell=True,
+    stdout=PIPE)
+  return revlist.communicate()[0].splitlines()
+

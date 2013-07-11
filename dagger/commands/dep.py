@@ -42,21 +42,15 @@ def handle(options, args):
       """ Non-zero return status """
       return
 
-    call(['git log -- dependencies.txt'], shell=True)
+    call(['git log -- dagger.cfg'], shell=True)
 
-    with open('dependencies.txt', 'r') as outp:
-      for line in outp:
-        dep = line.strip().split(' ')
-        if dep[0] == url and branch == dep[2]:
-          # Return to original branch
-          call(['git checkout %s' % lastbranch], shell=True)
-          return
+    config = dagger.Config()
 
-    with open('dependencies.txt', 'a') as outp:
-      outp.write(' '.join(args) + '\n')
+    """ TODO: update config with dependency details
+    """
 
     if options.commit:
-      call(['git add dependencies.txt'], shell=True)
+      call(['git add dagger.cfg'], shell=True)
 
       # Commit
       message = 'dagger deps ' + ' '.join(sys.argv[1:])
@@ -64,5 +58,3 @@ def handle(options, args):
 
       # Return to original branch
       call(['git checkout %s' % lastbranch], shell=True)
-
-
