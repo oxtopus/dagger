@@ -81,14 +81,18 @@ an error, or otherwise failed execution.
 
 - Checkout CI branch and pull latest
 
-    git fetch origin
-    git checkout CI
-    git merge origin/CI
+```
+git fetch origin
+git checkout CI
+git merge origin/CI
+```
 
 - Merge development branch into CI branch
 
-    git fetch origin
-    git merge --no-ff origin/master
+```
+git fetch origin
+git merge --no-ff origin/master
+```
 
 - Run tests
 
@@ -101,7 +105,7 @@ an error, or otherwise failed execution.
 
   * If validation command passes (returns zero), push to remote CI branch:
 
-    git push origin CI
+    `git push origin CI`
 
   * If tests fail, update dependencies.
 
@@ -115,7 +119,7 @@ an error, or otherwise failed execution.
 
   * If validation command passes, push to remote CI branch:
 
-    git push origin CI
+    `git push origin CI`
 
   * If validation command fails, raise an exception, notify the appropriate
   parties
