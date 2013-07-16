@@ -81,18 +81,18 @@ an error, or otherwise failed execution.
 
 - Checkout CI branch and pull latest
 
-```
-git fetch origin
-git checkout CI
-git merge origin/CI
-```
+    ```
+    git fetch origin
+    git checkout CI
+    git merge origin/CI
+    ```
 
 - Merge development branch into CI branch
 
-```
-git fetch origin
-git merge --no-ff origin/master
-```
+    ```
+    git fetch origin
+    git merge --no-ff origin/master
+    ```
 
 - Run tests
 
