@@ -31,9 +31,9 @@ projects (no circular references).
 
   For example:
 
-    - grokengine (trunk) depends on nupic
-    - grok-api-server depends on grokengine
-    - cluster-gateway depends on grok-api-server and grokengine
+  - grokengine (trunk) depends on nupic
+  - grok-api-server depends on grokengine
+  - cluster-gateway depends on grok-api-server and grokengine
 
 4. Everything a project needs to test itself are tracked in the CI
 branch.  Tests are invoked in a common way across all projects.  Each
