@@ -86,7 +86,7 @@ given project.  The dagger entry point is responsible for executing the
 following steps and returning meaningful return codes non-zero in the event of
 an error, or otherwise failed execution.
 
-- Checkout CI branch and pull latest
+### Checkout CI branch and pull latest
 
     ```
     git fetch origin
@@ -94,14 +94,14 @@ an error, or otherwise failed execution.
     git merge origin/CI
     ```
 
-- Merge development branch into CI branch
+### Merge development branch into CI branch
 
     ```
     git fetch origin
     git merge --no-ff origin/master
     ```
 
-- Run tests
+### Run tests
 
   At this point, CI branch is at the same state as master, and the
   documented dependencies are left untouched.  In setting up the test
@@ -133,7 +133,7 @@ an error, or otherwise failed execution.
   * If validation command fails, raise an exception, notify the appropriate
   parties
 
-- Additional validation
+### Additional validation
 
   Test against deployed versions for backward compatibility or
   additional regression testing.
