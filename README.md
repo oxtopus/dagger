@@ -56,11 +56,18 @@ configuration must identify the development branch and a validation command.
 If no CI branch exists, one will be created as an oprhan commit
 establishing an initial dagger configuration:
 
-  `git checkout --orphan CI`
-  `git rm -rf .`
+  ```
+  git checkout --orphan CI
+  git rm -rf .
+  ```
+
   ... create dagger configuration ...
-  `git add dagger.cfg`
-  `git commit`
+
+
+  ```
+  git add dagger.cfg
+  git commit
+  ```
 
 Initializing a project requires:
 
@@ -109,13 +116,15 @@ an error, or otherwise failed execution.
 
   * If tests fail, update dependencies.
 
-  Update dependencies file with results of `git rev-list -n 1 ...` and
-  commit the change, ammending the previous commit.
+    Update dependencies file with results of `git rev-list -n 1 ...` and
+    commit the change, ammending the previous commit.
 
+    ```
     git add dependencies.txt
     git commit --amend
+    ```
 
-  Run validation command again with the updated dependencies.
+    Run validation command again with the updated dependencies.
 
   * If validation command passes, push to remote CI branch:
 
