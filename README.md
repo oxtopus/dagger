@@ -14,19 +14,19 @@ interoperability between dependent projects.
 Principles
 ----------
 
-0. There exists a branch in every project that is designated to be
+0 - There exists a branch in every project that is designated to be
 stable.  For our purposes, we'll call it the CI branch, although, in
 practice it may have a different name (for example, "stable" or
 "release").
 
-1. There exists a branch in every project that is designated to be the
+1 - There exists a branch in every project that is designated to be the
 development branch.  Typically, this will be "master".
 
-2. Project dependencies are well documented (explicitly by repository
+2 - Project dependencies are well documented (explicitly by repository
 url + tish) in a file that exists in the root of the project in
 the CI branch.
 
-3. There is an inherently one-directional dependency graph across all
+3 - There is an inherently one-directional dependency graph across all
 projects (no circular references).
 
   For example:
@@ -35,7 +35,7 @@ projects (no circular references).
   - grok-api-server depends on grokengine
   - cluster-gateway depends on grok-api-server and grokengine
 
-4. Everything a project needs to test itself are tracked in the CI
+4 - Everything a project needs to test itself are tracked in the CI
 branch.  Tests are invoked in a common way across all projects.  Each
 project-specific testing scenario is comprehensive and sets up itself,
 as well as its dependencies in isolation.
