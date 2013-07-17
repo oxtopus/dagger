@@ -55,18 +55,13 @@ configuration must identify the development branch and a validation command.
 If no stable branch exists, one will be created as an oprhan commit
 establishing an initial dagger configuration:
 
-  ```
-  git checkout --orphan CI
-  git rm -rf .
-  ```
+    git checkout --orphan CI
+    git rm -rf .
 
-  ... create dagger configuration ...
+    ... create dagger configuration ...
 
-
-  ```
-  git add dagger.cfg
-  git commit
-  ```
+    git add dagger.cfg
+    git commit
 
 Initializing a project requires:
 
