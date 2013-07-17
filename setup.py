@@ -1,6 +1,19 @@
+import sys
 from setuptools import setup
+from setuptools.command.test import test as TestCommand
+
 
 requirements = map(str.strip, open('requirements.txt').readlines())
+
+class PyTest(TestCommand):
+  def finalize_options(self):
+    TestCommand.finalize_options(self)
+    self.test_args = []
+    self.test_suite = True
+  def run_tests(self):
+    import pytest
+    errno = pytest.main(self.test_args)
+    sys.exit(errno)
 
 setup(
   name = 'Dagger',
@@ -25,6 +38,10 @@ setup(
           'dagger = dagger.cli:main'
         ]
     },
-  requires = requirements,
-  install_requires = requirements
+  install_requires = requirements,
+  tests_require = ['pytest'],
+  cmdclass = \
+    {
+      'test': PyTest
+    },
 )
