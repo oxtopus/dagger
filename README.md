@@ -91,7 +91,7 @@ an error, or otherwise failed execution.
     git checkout CI
     git merge origin/CI
 
-### Merge development branch into CI branch
+### Merge development branch into stable branch
 
     git merge --no-ff origin/master
 
@@ -121,7 +121,7 @@ an error, or otherwise failed execution.
 
     Run validation command again with the updated dependencies.
 
-  * If validation command passes, push to remote CI branch:
+  * If validation command passes, push to remote stable branch:
 
     `git push origin CI`
 
@@ -136,6 +136,6 @@ an error, or otherwise failed execution.
 Releases
 --------
 
-Release candidates are identified by traversing the CI branch and the
+Release candidates are identified by traversing the stable branch and the
 documented dependencies.  When a particular project is released, the
 specific revision is tagged accordingly.
