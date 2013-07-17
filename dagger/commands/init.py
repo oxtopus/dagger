@@ -11,10 +11,14 @@ parser.add_option('-b', '--branch',
   dest='branch',
   default='CI',
   help='Stable branch name [Default: CI]')
-parser.add_option('-d', '--dependencies',
-  dest='dependencies',
-  metavar='FILE',
-  help='Project dependencies')
+parser.add_option('-r', '--remote',
+  dest='remote',
+  default='origin',
+  help='Remote repository name [Default: origin]')
+parser.add_option('-s', '--script',
+  dest='script',
+  default='',
+  help='Validation command')
 parser.add_option('--dry-run',
   dest='dryrun',
   action='store_true',
@@ -43,7 +47,8 @@ def handle(options, args):
       # Write dagger config...
       conf = dagger.Config()
       conf.set('dagger', 'tracking', lastbranch)
-      conf.set('dagger', 'script', '')
+      conf.set('dagger', 'remote', options.remote)
+      conf.set('dagger', 'script', options.script)
       conf.save()
 
       call(['git add dagger.cfg'], shell=True)
