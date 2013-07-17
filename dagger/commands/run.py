@@ -34,5 +34,17 @@ def handle(options, args):
 
     call(['git merge --no-ff %s -m "%s"' % (tracking, "Merging master...")], shell=True)
 
+    if config.has_option('dagger', 'script'):
+      script = config.get('dagger', 'script')
+      if script:
+        print 'Executing `%s`' % script
+        call([script], shell=True)
+
+      else:
+        print 'Empty script.  Continuing.'
+
+    else:
+      print 'No script.  Continuing.'
+
     # Return to original branch
     call(['git checkout %s' % lastbranch], shell=True)

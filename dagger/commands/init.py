@@ -43,6 +43,7 @@ def handle(options, args):
       # Write dagger config...
       conf = dagger.Config()
       conf.set('dagger', 'tracking', lastbranch)
+      conf.set('dagger', 'script', '')
       conf.save()
 
       call(['git add dagger.cfg'], shell=True)
@@ -55,7 +56,7 @@ def handle(options, args):
       call(['git checkout %s' % lastbranch], shell=True)
 
       print options.branch, 'branch created with initial dagger config.\n'
-      print 'Next step: Checkout', options.branch, 'update dependencies'
+      print 'Next step: Checkout', options.branch, 'and configure dagger.'
 
     else:
       print 'Nothing to do.'
