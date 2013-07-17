@@ -14,31 +14,30 @@ interoperability between dependent projects.
 Principles
 ----------
 
-0 - There exists a branch in every project that is designated to be
-stable.  For our purposes, we'll call it the CI branch, although, in
-practice it may have a different name (for example, "stable" or
-"release").
+1. There exists a branch in every project that is designated to be
+stable.  Although, in practice it may have a different name (for example,
+"stable" or "release"), "CI" is the default branch name.
 
-1 - There exists a branch in every project that is designated to be the
+2. There exists a branch in every project that is designated to be the
 development branch.  Typically, this will be "master".
 
-2 - Project dependencies are well documented (explicitly by repository
-url + tish) in a file that exists in the root of the project in
+3. Project dependencies are well documented (explicitly by repository
+url + revision) in a file that exists in the root of the project in
 the CI branch.
 
-3 - There is an inherently one-directional dependency graph across all
+4. There is an inherently one-directional dependency graph across all
 projects (no circular references).
 
-  For example:
+    For example:
 
-  - grokengine (trunk) depends on nupic
-  - grok-api-server depends on grokengine
-  - cluster-gateway depends on grok-api-server and grokengine
+    - grokengine (trunk) depends on nupic
+    - grok-api-server depends on grokengine
+    - cluster-gateway depends on grok-api-server and grokengine
 
-4 - Everything a project needs to test itself are tracked in the CI
+5. Everything a project needs to validate itself are tracked in the stable
 branch.  Tests are invoked in a common way across all projects.  Each
 project-specific testing scenario is comprehensive and sets up itself,
-as well as its dependencies in isolation.
+as well as its dependencies in *isolation*.
 
 Project setup
 -------------
@@ -46,14 +45,14 @@ Project setup
 ### Dagger configuration
 
 Every dagger project must have a dagger configuration consisting of a file at
-the root of the project, resolvable from the CI branch.  The configuration
+the root of the project, resolvable from the stable branch.  The configuration
 file should be easily identifiable (for example, `dagger.cfg`), and in a
 format that is easily human-readable and human-editable.  At a minimum, the
 configuration must identify the development branch and a validation command.
 
 ### Bootstrapping a dagger project
 
-If no CI branch exists, one will be created as an oprhan commit
+If no stable branch exists, one will be created as an oprhan commit
 establishing an initial dagger configuration:
 
   ```
@@ -72,21 +71,21 @@ establishing an initial dagger configuration:
 Initializing a project requires:
 
 - Target repository (assumed to be .)
-- Target CI branch (default: CI)
+- Target stable branch (default: CI)
 - List of dependencies (optional), each consisting of:
-  - Repository URL
-  - Initial revision
-  - Stable branch
+    * Repository URL
+    * Initial revision
+    * Stable branch
 
-Dagger Process
---------------
+Dagger Validation Process
+-------------------------
 
-There must be a single entry point for executing the dagger process for a
-given project.  The dagger entry point is responsible for executing the
+There must be a single entry point for executing the dagger validation process
+for a given project.  The dagger entry point is responsible for executing the
 following steps and returning meaningful return codes non-zero in the event of
 an error, or otherwise failed execution.
 
-### Checkout CI branch and pull latest
+### Checkout stable branch and pull latest
 
     git fetch origin
     git checkout CI
@@ -94,19 +93,19 @@ an error, or otherwise failed execution.
 
 ### Merge development branch into CI branch
 
-    git fetch origin
     git merge --no-ff origin/master
 
-### Run tests
+### Run validation
 
-  At this point, CI branch is at the same state as master, and the
+  At this point, stable branch is at the same state as master, and the
   documented dependencies are left untouched.  In setting up the test
   environment, the specific versions of the documented dependencies are
-  used.
+  used.  Versions are derived from the dependencies documented in dagger
+  configuration in stable branch.
 
   Execute validation command.
 
-  * If validation command passes (returns zero), push to remote CI branch:
+  * If validation command passes (returns zero), push to remote stable branch:
 
     `git push origin CI`
 
