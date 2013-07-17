@@ -25,7 +25,9 @@ def handle(options, args):
 
     # Checkout working branch
     if call(['git checkout %s' % options.branch], shell=True):
-      """ Non-zero return status """
+      print "Stable branch", options.branch, "cannot be found, you can " \
+        "create one with `dagger init`.  See `dagger help` for additional " \
+        "details."
       return
 
     config = dagger.Config()

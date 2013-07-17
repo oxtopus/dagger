@@ -18,7 +18,7 @@ def workingdir(path):
   cd to original path
   """
   original = os.getcwd()
-  with open(os.path.join(path, 'dagger'), 'w') as dagger:
+  with open(os.path.join(path, 'dagger.lock'), 'w') as dagger:
     flock(dagger, LOCK_EX)
     if not os.path.samefile(path, original):
       os.chdir(path)
