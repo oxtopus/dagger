@@ -1,6 +1,8 @@
 Dagger
 ======
 
+Documentation can be found at <http://oxtopus.github.io/dagger/build/sphinx/html/index.html>
+
 What is Dagger?
 ---------------
 
