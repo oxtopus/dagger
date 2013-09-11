@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dagger &mdash; Dagger 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Dagger 1.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="#">Dagger 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dagger">
+<h1>Dagger<a class="headerlink" href="#dagger" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Installation is managed via setuptools.</p>
+<div class="highlight-python"><pre>$ python setup.py install</pre>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Once installed, dagger operations are executed via the included <tt class="docutils literal"><span class="pre">dagger</span></tt>
+command-line utility, specifying sub-commands.  For a complete list of
+available sub-commands, run <tt class="docutils literal"><span class="pre">dagger</span> <span class="pre">--help</span></tt>.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>$ dagger --help
+Usage: dagger [command] [options]
+
+Available commands:
+
+    status
+    init
+    run
+
+Options:
+  -h, --help  show this help message and exit</pre>
+</div>
+<div class="section" id="initializing-a-project">
+<h3>Initializing a project<a class="headerlink" href="#initializing-a-project" title="Permalink to this headline">¶</a></h3>
+<p>First, initiliaze a project using the <tt class="docutils literal"><span class="pre">init</span></tt> sub-command.</p>
+<div class="highlight-python"><pre>$ cd &lt;path to project&gt;
+$ dagger init</pre>
+</div>
+<p>By default, this will create a branch named <tt class="docutils literal"><span class="pre">CI</span></tt> in your project repository
+and a file named <tt class="docutils literal"><span class="pre">dagger.cfg</span></tt> in the root of the project in the <tt class="docutils literal"><span class="pre">CI</span></tt>
+branch.</p>
+<div class="highlight-python"><pre>$ git checkout CI
+$ cat dagger.cfg
+[dagger]
+tracking = master
+remote = origin
+script =</pre>
+</div>
+<p>Edit your <tt class="docutils literal"><span class="pre">dagger.cfg</span></tt> file, specifying a value for the <tt class="docutils literal"><span class="pre">script</span></tt>
+configuration option in the <tt class="docutils literal"><span class="pre">[dagger]</span></tt> section.  This is the command that
+will validate a project.  Add and commit your changes, return to your
+development branch.</p>
+<div class="highlight-python"><pre>$ git commit -a
+$ git checkout master</pre>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h3>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h3>
+<p>At any time, you can run the <tt class="docutils literal"><span class="pre">status</span></tt> sub-command to report the status of
+your project within the context of Dagger.  The status sub-command will report
+the number of commits your stable branch is behind development:</p>
+<div class="highlight-python"><pre>$ dagger status</pre>
+</div>
+<p>If this is your first time, your stable branch will be significantly behind
+your development branch (this is normal).</p>
+<div class="highlight-python"><pre>$ dagger run</pre>
+</div>
+<p>Assuming validation passed, your stable branch will have caught up to
+development.  Verify by running the <tt class="docutils literal"><span class="pre">status</span></tt> sub-command again:</p>
+<div class="highlight-python"><pre>$ dagger status</pre>
+</div>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dagger</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#initializing-a-project">Initializing a project</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="#">Dagger 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Numenta.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
